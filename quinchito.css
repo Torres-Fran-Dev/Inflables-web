@@ -1,0 +1,27 @@
+/* Título con Serif para el toque elegante */
+.font-title {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Efecto de suavizado en toda la navegación del footer */
+footer a {
+    transition: all 0.3s ease;
+    text-underline-offset: 4px;
+}
+
+footer a:hover {
+    letter-spacing: 0.05em; /* Un "aire" extra al pasar el mouse */
+}
+
+/* Evita que el footer se sienta muy pegado al contenido */
+footer {
+    margin-top: 4rem;
+    box-shadow: 0 -1px 10px rgba(0,0,0,0.02);
+}
+
+/* En celulares, centramos todo para que no se vea desordenado */
+@media (max-width: 768px) {
+    footer .flex-col {
+        gap: 1.5rem;
+    }
+}

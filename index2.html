@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobiliario | Inflables Tino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-title { font-family: 'Playfair Display', serif; }
+        .img-card { 
+            object-fit: cover; 
+            width: 100%; 
+            height: 320px; 
+            border-radius: 1rem; 
+            transition: all 0.5s ease;
+        }
+        .img-card:hover { transform: scale(1.03); }
+    </style>
+</head>
+</a> 
+<body class="bg-slate-50 text-slate-800">
+
+
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-[100] border-b border-slate-100">
+        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <h1 class="font-title text-2xl font-bold text-slate-900 tracking-tight uppercase">
+                INFLABLES<span class="text-amber-600">TINO</span>
+            </h1>
+
+            <button id="menu-btn" class="md:hidden text-slate-600 focus:outline-none p-2">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <ul id="menu-links" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 flex-col items-center gap-6 py-8 font-medium text-sm uppercase tracking-[0.2em] text-slate-600 md:static md:flex md:flex-row md:w-auto md:bg-transparent md:border-none md:py-0 shadow-xl md:shadow-none transition-all">
+                <li><a href="index.html" class="hover:text-amber-600 transition-colors">Inicio</a></li>
+                <li><a href="index2.html" class="text-amber-600 transition-colors border-b-2 border-amber-600">Mobiliario</a></li>
+                <li><a href="index3.html" class="hover:text-amber-600 transition-colors">Quinchito</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="bg-white py-20 border-b border-slate-100 text-center">
+        <div class="container mx-auto px-6">
+            <h2 class="font-title text-4xl md:text-6xl text-slate-900 mb-6 uppercase tracking-tighter">Nuestro Mobiliario</h2>
+            <div class="w-24 h-1 bg-amber-600 mx-auto mb-6 rounded-full"></div>
+            <p class="text-slate-500 max-w-2xl mx-auto text-lg font-light">Equipamiento premium diseñado para brindar confort y elegancia a cada uno de tus invitados.</p>
+        </div>
+    </section>
+
+    <section class="py-20 container mx-auto px-6">
+        <h3 class="font-title text-2xl mb-12 border-l-4 border-amber-600 pl-6 uppercase tracking-widest text-slate-900">Livings, Sillones y Carpas</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <img src="img/livings.webp" class="img-card shadow-lg" alt="Livings">
+            <img src="img/livingss.webp" class="img-card shadow-lg" alt="Livings">
+            <img src="img/sillones.webp" class="img-card shadow-lg" alt="Sillones">
+            <img src="img/tronos.webp" class="img-card shadow-lg" alt="Tronos">
+            <img src="img/carpa.webp" class="img-card shadow-lg" alt="Carpas">
+            <img src="img/sillontrono.webp" class="img-card shadow-lg" alt="Sillón Trono">
+            <img src="img/banquetas.webp" class="img-card shadow-lg" alt="Banquetas">
+            <img src="img/patios.webp" class="img-card shadow-lg" alt="Patios">
+            <img src="img/carpaa.webp" class="img-card shadow-lg" alt="Arcos">
+        </div>
+    </section>
+
+    <section class="py-20 bg-white border-y border-slate-100">
+        <div class="container mx-auto px-6">
+            <h3 class="font-title text-2xl mb-12 border-l-4 border-amber-600 pl-6 uppercase tracking-widest text-slate-900">Letras Gigantes y Ambientación</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <img src="img/letras.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras">
+                <img src="img/letrasss.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras">
+                <img src="img/xv.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras XV">
+                <img src="img/50.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras 50">
+                <img src="img/ailen.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Nombre">
+                <img src="img/xvxv.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="XV">
+                <img src="img/agus.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Agus">
+                <img src="img/50tronos.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="50 años">
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-10 border-t border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                
+                <div class="text-center md:text-left order-2 md:order-1">
+                    <h3 class="font-title text-xl text-slate-900 uppercase tracking-tighter">
+                        Inflables<span class="text-amber-600">Tino</span>
+                    </h3>
+                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.2em] mt-1">© 2026 Reservados todos los derechos</p>
+                </div>
+
+                <nav class="order-1 md:order-2">
+                    <ul class="flex gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
+                        <li><a href="index.html" class="hover:text-amber-600 transition-colors">Inicio</a></li>
+                        <li><a href="index2.html" class="hover:text-amber-600 transition-colors">Mobiliario</a></li>
+                        <li><a href="index3.html" class="hover:text-amber-600 transition-colors">Quinchito</a></li>
+                    </ul>
+                </nav>
+
+                <div class="order-3">
+                    <a href="https://instagram.com/inflables_tino" target="_blank" class="group flex items-center gap-3 text-slate-400 hover:text-amber-600 transition-all">
+                        <span class="text-[10px] font-bold uppercase tracking-widest">Instagram</span>
+                        <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-amber-50 transition-colors">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu-links');
+        const icon = document.getElementById('menu-icon');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+            if (menu.classList.contains('hidden')) {
+                icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        });
+    </script>
+</body>
+</html>
