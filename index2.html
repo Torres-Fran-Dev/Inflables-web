@@ -7,126 +7,200 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         .font-title { font-family: 'Playfair Display', serif; }
-        .img-card { 
-            object-fit: cover; 
-            width: 100%; 
-            height: 320px; 
-            border-radius: 1rem; 
-            transition: all 0.5s ease;
+        
+        /* Side-bar lateral */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 75%;
+            max-width: 300px;
         }
-        .img-card:hover { transform: scale(1.03); }
+
+        /* Efectos de Hover en Cards */
+        .card-hover { transition: all 0.4s ease; }
+        .card-hover:hover { transform: translateY(-8px); }
+        
+        .img-container { height: 280px; overflow: hidden; position: relative; }
+        .img-container img { transition: transform 0.6s ease; }
+        .card-hover:hover .img-container img { transform: scale(1.1); }
+
+        /* Overlay para las fotos de ambientación */
+        .img-overlay {
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .group:hover .img-overlay { opacity: 1; }
     </style>
 </head>
-</a> 
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 antialiased">
 
-
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-[100] border-b border-slate-100">
-        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
-            <h1 class="font-title text-2xl font-bold text-slate-900 tracking-tight uppercase">
-                INFLABLES<span class="text-amber-600">TINO</span>
+    <nav class="bg-white/95 backdrop-blur-md fixed top-0 w-full z-[200] border-b border-slate-100 shadow-sm">
+        <div class="container mx-auto px-6 h-16 flex items-center justify-between">
+            <h1 class="font-title text-lg md:text-xl font-bold text-slate-900 tracking-tight uppercase">
+                INFLABLES<span class="text-amber-600 font-black italic">TINO</span>
             </h1>
 
-            <button id="menu-btn" class="md:hidden text-slate-600 focus:outline-none p-2">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <ul class="hidden md:flex items-center gap-8 font-bold text-[9px] uppercase tracking-[0.2em] text-slate-500">
+                <li><a href="index.html" class="hover:text-amber-600 transition-colors">Inicio</a></li>
+                <li><a href="index2.html" class="text-amber-600 border-b-2 border-amber-600 pb-1">Mobiliario</a></li>
+                <li><a href="index3.html" class="hover:text-amber-600 transition-colors">Quinchito</a></li>
+                <li><a href="index4.html" class="hover:text-amber-600 transition-colors">Contacto</a></li>
+            </ul>
+
+            <button id="open-menu" class="md:hidden p-2 text-slate-900">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-
-            <ul id="menu-links" class="hidden absolute top-20 left-0 w-full bg-white border-b border-slate-100 flex-col items-center gap-6 py-8 font-medium text-sm uppercase tracking-[0.2em] text-slate-600 md:static md:flex md:flex-row md:w-auto md:bg-transparent md:border-none md:py-0 shadow-xl md:shadow-none transition-all">
-                <li><a href="index.html" class="hover:text-amber-600 transition-colors">Inicio</a></li>
-                <li><a href="index2.html" class="text-amber-600 transition-colors border-b-2 border-amber-600">Mobiliario</a></li>
-                <li><a href="index3.html" class="hover:text-amber-600 transition-colors">Quinchito</a></li>
-            </ul>
         </div>
     </nav>
 
-    <section class="bg-white py-20 border-b border-slate-100 text-center">
-        <div class="container mx-auto px-6">
-            <h2 class="font-title text-4xl md:text-6xl text-slate-900 mb-6 uppercase tracking-tighter">Nuestro Mobiliario</h2>
-            <div class="w-24 h-1 bg-amber-600 mx-auto mb-6 rounded-full"></div>
-            <p class="text-slate-500 max-w-2xl mx-auto text-lg font-light">Equipamiento premium diseñado para brindar confort y elegancia a cada uno de tus invitados.</p>
+    <div id="mobile-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[250] hidden"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full bg-slate-900 z-[300] translate-x-full md:hidden p-10 flex flex-col shadow-2xl">
+        <button id="close-menu" class="self-end text-white mb-12">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="flex flex-col gap-6 font-title italic text-xl">
+            <a href="index.html" class="text-white hover:text-amber-500 transition-colors">Inicio</a>
+            <a href="index2.html" class="text-amber-500">Mobiliario</a>
+            <a href="index3.html" class="text-white hover:text-amber-500 transition-colors">Quinchito</a>
+            <a href="index4.html" class="text-white hover:text-amber-500 transition-colors">Contacto</a>
         </div>
-    </section>
+    </div>
 
-    <section class="py-20 container mx-auto px-6">
-        <h3 class="font-title text-2xl mb-12 border-l-4 border-amber-600 pl-6 uppercase tracking-widest text-slate-900">Livings, Sillones y Carpas</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <img src="img/livings.webp" class="img-card shadow-lg" alt="Livings">
-            <img src="img/livingss.webp" class="img-card shadow-lg" alt="Livings">
-            <img src="img/sillones.webp" class="img-card shadow-lg" alt="Sillones">
-            <img src="img/tronos.webp" class="img-card shadow-lg" alt="Tronos">
-            <img src="img/carpa.webp" class="img-card shadow-lg" alt="Carpas">
-            <img src="img/sillontrono.webp" class="img-card shadow-lg" alt="Sillón Trono">
-            <img src="img/banquetas.webp" class="img-card shadow-lg" alt="Banquetas">
-            <img src="img/patios.webp" class="img-card shadow-lg" alt="Patios">
-            <img src="img/carpaa.webp" class="img-card shadow-lg" alt="Arcos">
+    <div class="h-16"></div> <header class="bg-slate-900 py-20 text-center relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10 text-white">
+            <h2 class="font-title text-4xl md:text-6xl mb-4 italic tracking-tighter uppercase text-amber-600">Catálogo</h2>
+            <div class="w-16 h-1 bg-amber-600 mx-auto mb-6 rounded-full"></div>
+            <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.4em] italic">Equipamiento Premium para Eventos</p>
         </div>
-    </section>
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:20px_20px]"></div>
+    </header>
 
-    <section class="py-20 bg-white border-y border-slate-100">
-        <div class="container mx-auto px-6">
-            <h3 class="font-title text-2xl mb-12 border-l-4 border-amber-600 pl-6 uppercase tracking-widest text-slate-900">Letras Gigantes y Ambientación</h3>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <img src="img/letras.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras">
-                <img src="img/letrasss.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras">
-                <img src="img/xv.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras XV">
-                <img src="img/50.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Letras 50">
-                <img src="img/ailen.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Nombre">
-                <img src="img/xvxv.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="XV">
-                <img src="img/agus.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="Agus">
-                <img src="img/50tronos.webp" class="w-full h-56 object-cover rounded-2xl shadow-md hover:scale-105 transition-transform" alt="50 años">
+    <section class="py-20 container mx-auto px-6 max-w-7xl">
+        <h3 class="font-title text-2xl md:text-3xl mb-12 border-l-4 border-amber-600 pl-6 uppercase tracking-tighter text-slate-900 italic">Livings & Confort</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            <div class="card-hover bg-white rounded-[2rem] overflow-hidden border border-slate-100 flex flex-col italic shadow-sm">
+                <div class="img-container">
+                    <img src="img/livings.webp" alt="Livings Completos" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow">
+                    <h4 class="font-title text-xl mb-3 text-slate-900 uppercase">Livings <span class="text-amber-600">Completos</span></h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Juegos de sillones puff y mesas ratonas de ecocuero blanco. Ideales para recepciones.</p>
+                    <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
+                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Capacidad</span>
+                        <p class="text-slate-900 text-[10px] font-bold">10 Personas por Juego</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-hover bg-white rounded-[2rem] overflow-hidden border border-slate-100 flex flex-col italic shadow-sm">
+                <div class="img-container">
+                    <img src="img/sillontrono.webp" alt="Sillón Trono" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow">
+                    <h4 class="font-title text-xl mb-3 text-slate-900 uppercase">Sillón <span class="text-amber-600">Trono</span></h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">La pieza central para agasajados. Diseño imponente en capitoné blanco.</p>
+                    <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
+                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Uso</span>
+                        <p class="text-slate-900 text-[10px] font-bold">XV Años / Bodas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-hover bg-white rounded-[2rem] overflow-hidden border border-slate-100 flex flex-col italic shadow-sm">
+                <div class="img-container">
+                    <img src="img/carpa.webp" alt="Carpas Gazebos" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow">
+                    <h4 class="font-title text-xl mb-3 text-slate-900 uppercase">Carpas <span class="text-amber-600">Gazebos</span></h4>
+                    <p class="text-slate-500 text-sm mb-6 leading-relaxed">Protección elegante para exteriores. Estructura reforzada y lona impermeable.</p>
+                    <div class="pt-4 border-t border-slate-50 flex items-center justify-between">
+                        <span class="text-[9px] uppercase tracking-widest text-slate-400 font-bold">Medida</span>
+                        <p class="text-slate-900 text-[10px] font-bold">3x3m / 6x3m</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-white py-10 border-t border-slate-100">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+    <section class="py-20 bg-slate-900">
+        <div class="container mx-auto px-6 max-w-7xl">
+            <div class="text-center md:text-left mb-12">
+                <span class="text-amber-600 text-[10px] font-bold uppercase tracking-[0.6em] mb-2 block italic">Detalles que Brillan</span>
+                <h3 class="font-title text-3xl md:text-4xl text-white italic tracking-tighter uppercase">Ambientación <span class="text-amber-600">LED</span></h3>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="group relative overflow-hidden rounded-2xl h-64 md:h-72 border border-white/5 shadow-2xl cursor-pointer">
+                    <img src="img/letras.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125" alt="Letras LED">
+                    <div class="img-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h5 class="text-white font-title text-lg italic uppercase">Letras LED</h5>
+                        <p class="text-amber-600 text-[9px] font-bold uppercase tracking-widest mt-1">Nombres Personalizados</p>
+                    </div>
+                </div>
+
+                <div class="group relative overflow-hidden rounded-2xl h-64 md:h-72 border border-white/5 shadow-2xl cursor-pointer">
+                    <img src="img/xv.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125" alt="XV">
+                    <div class="img-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h5 class="text-white font-title text-lg italic uppercase">Números</h5>
+                        <p class="text-amber-600 text-[9px] font-bold uppercase tracking-widest mt-1">Gigantes con Brillo</p>
+                    </div>
+                </div>
                 
-                <div class="text-center md:text-left order-2 md:order-1">
-                    <h3 class="font-title text-xl text-slate-900 uppercase tracking-tighter">
-                        Inflables<span class="text-amber-600">Tino</span>
-                    </h3>
-                    <p class="text-[10px] text-slate-400 uppercase tracking-[0.2em] mt-1">© 2026 Reservados todos los derechos</p>
+                <div class="group relative overflow-hidden rounded-2xl h-64 md:h-72 border border-white/5 shadow-2xl cursor-pointer">
+                    <img src="img/50.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125" alt="50">
+                    <div class="img-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h5 class="text-white font-title text-lg italic uppercase">Aniversarios</h5>
+                        <p class="text-amber-600 text-[9px] font-bold uppercase tracking-widest mt-1">Luz Cálida</p>
+                    </div>
                 </div>
 
-                <nav class="order-1 md:order-2">
-                    <ul class="flex gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-500">
-                        <li><a href="index.html" class="hover:text-amber-600 transition-colors">Inicio</a></li>
-                        <li><a href="index2.html" class="hover:text-amber-600 transition-colors">Mobiliario</a></li>
-                        <li><a href="index3.html" class="hover:text-amber-600 transition-colors">Quinchito</a></li>
-                    </ul>
-                </nav>
-
-                <div class="order-3">
-                    <a href="https://instagram.com/inflables_tino" target="_blank" class="group flex items-center gap-3 text-slate-400 hover:text-amber-600 transition-all">
-                        <span class="text-[10px] font-bold uppercase tracking-widest">Instagram</span>
-                        <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-amber-50 transition-colors">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                        </div>
-                    </a>
+                <div class="group relative overflow-hidden rounded-2xl h-64 md:h-72 border border-white/5 shadow-2xl cursor-pointer">
+                    <img src="img/ailen.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125" alt="Ailen">
+                    <div class="img-overlay absolute inset-0 flex flex-col justify-end p-6">
+                        <h5 class="text-white font-title text-lg italic uppercase">Carteles</h5>
+                        <p class="text-amber-600 text-[9px] font-bold uppercase tracking-widest mt-1">Neón Flex</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-12 border-t border-slate-100 text-center">
+        <h3 class="font-title text-2xl text-slate-900 mb-2 italic">
+            Inflables<span class="text-amber-600 font-black">Tino</span>
+        </h3>
+        <p class="text-[9px] text-slate-400 uppercase tracking-[0.4em] mb-4">📍 Garín, Buenos Aires</p>
+        <div class="flex justify-center gap-4">
+             <a href="https://instagram.com/inflables_tino/?hl=es-la" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-amber-600 transition-all shadow-lg">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+             <a href="https://www.instagram.com/elquinchito_2.3/" target="_blank" class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center hover:bg-amber-600 transition-all shadow-lg">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.791-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.209-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
         </div>
     </footer>
 
     <script>
-        const btn = document.getElementById('menu-btn');
-        const menu = document.getElementById('menu-links');
-        const icon = document.getElementById('menu-icon');
+        const openBtn = document.getElementById('open-menu');
+        const closeBtn = document.getElementById('close-menu');
+        const overlay = document.getElementById('mobile-overlay');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-            if (menu.classList.contains('hidden')) {
-                icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-            } else {
-                icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-            }
-        });
+        const toggleMenu = (isOpen) => {
+            mobileMenu.classList.toggle('translate-x-full', !isOpen);
+            overlay.classList.toggle('hidden', !isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        };
+
+        openBtn.addEventListener('click', () => toggleMenu(true));
+        closeBtn.addEventListener('click', () => toggleMenu(false));
+        overlay.addEventListener('click', () => toggleMenu(false));
     </script>
 </body>
 </html>
